@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Please Forgive Me ❤️</title>
+
+<style>
+    * { box-sizing: border-box; }
+
+    body {
+        min-height: 100vh;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #ffe6f0, #ffd6e8);
+        font-family: "Segoe UI", sans-serif;
+        padding: 16px;
+        overflow: hidden;
+    }
+
+    .card {
+        background: white;
+        width: 100%;
+        max-width: 380px;
+        padding: 30px 22px;
+        border-radius: 22px;
+        text-align: center;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        animation: fadeIn 1s ease;
+        z-index: 2;
+    }
+
+    h1 {
+        color: #ff4d88;
+        font-size: clamp(22px, 6vw, 26px);
+        margin-bottom: 20px;
+        min-height: 60px;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: center;
+        gap: 14px;
+        flex-wrap: wrap;
+    }
+
+    button {
+        border: none;
+        border-radius: 30px;
+        padding: 12px 26px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    #yesBtn {
+        background: #ff4d88;
+        color: white;
+        min-width: 120px;
+        animation: heartbeat 1.6s infinite;
+    }
+
+    #noBtn {
+        background: #ddd;
+        min-width: 120px;
+    }
+
+    /* Heartbeat animation */
+    @keyframes heartbeat {
+        0% { transform: scale(1); }
+        25% { transform: scale(1.08); }
+        40% { transform: scale(1); }
+        60% { transform: scale(1.12); }
+        100% { transform: scale(1); }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Floating hearts */
+    .heart {
+        position: absolute;
+        bottom: -20px;
+        color: #ff4d88;
+        font-size: 20px;
+        animation: floatUp 4s linear forwards;
+        opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+        from {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+        to {
+            transform: translateY(-100vh) scale(1.5);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+    <h1 id="message">Will you please forgive me? 🥺</h1>
+
+    <div class="buttons">
+        <button id="yesBtn" onclick="yesClick()">Yes 💖</button>
+        <button id="noBtn" onclick="noClick()">No 💔</button>
+    </div>
+</div>
+
+<script>
+    let step = 0;
+    let yesSize = 16;
+
+    function noClick() {
+        const message = document.getElementById("message");
+        const yesBtn = document.getElementById("yesBtn");
+
+        yesSize += 6;
+        yesBtn.style.fontSize = yesSize + "px";
+        yesBtn.style.padding = (12 + yesSize / 4) + "px";
+
+        if (step === 0) {
+            message.innerHTML = "Are you sure? 😔";
+        } else if (step === 1) {
+            message.innerHTML = "Please LALAK… 🥹❤️";
+        }
+
+        step++;
+    }
+
+    function yesClick() {
+        // Floating hearts
+        for (let i = 0; i < 20; i++) {
+            createHeart();
+        }
+
+        setTimeout(() => {
+            document.body.innerHTML = `
+                <div style="text-align:center; padding:20px; animation: fadeIn 1s ease;">
+                    <h1 style="color:#ff4d88; font-size:clamp(26px,6vw,32px);">
+                        Thank you, LALAK ❤️
+                    </h1>
+                    <p style="font-size:clamp(16px,5vw,20px); color:#555; line-height:1.6;">
+                        Your forgiveness means everything to me.  
+                        I promise to grow, to listen,  
+                        and to love you better every single day 💕  
+                        <br><br>
+                        — Yours, always
+                    </p>
+                </div>
+            `;
+        }, 800);
+    }
+
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (16 + Math.random() * 20) + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 4000);
+    }
+</script>
+
+</body>
+</html>
